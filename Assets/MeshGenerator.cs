@@ -7,12 +7,12 @@ public class MeshGenerator : MonoBehaviour
 {
 
     [SerializeField]
-    float minRadius = 0;
+    float _minRadius = 0;
     [SerializeField]
-    float maxRadius = 5;
+    float _maxRadius = 5;
 
     [SerializeField]
-    bool isRegularTetrahedron = false;
+    bool _isRegularTetrahedron = false;
 
 
     private const float TetrAngle = Mathf.PI * 109.4712f / 180;
@@ -20,13 +20,13 @@ public class MeshGenerator : MonoBehaviour
 
     void Start()
     {
-        if(!isRegularTetrahedron)
+        if(!_isRegularTetrahedron)
         {
-            GetComponent<MeshFilter>().mesh = RandomTetrahedron(minRadius, maxRadius);
+            GetComponent<MeshFilter>().mesh = RandomTetrahedron(_minRadius, _maxRadius);
         }
         else
         {
-            GetComponent<MeshFilter>().mesh = RegularTetrahedron(Random.Range(minRadius,maxRadius));
+            GetComponent<MeshFilter>().mesh = RegularTetrahedron(Random.Range(_minRadius,_maxRadius));
         }
         
     }
@@ -53,8 +53,8 @@ public class MeshGenerator : MonoBehaviour
 
         for (int i=1;i<=3;i++)
         {
-            points[i] = new Vector3(Random.Range(minRadius, maxRadius),Random.Range(minRadius, maxRadius),
-                Random.Range(minRadius, maxRadius)) + startPos;
+            points[i] = new Vector3(Random.Range(_minRadius, _maxRadius),Random.Range(_minRadius, _maxRadius),
+                Random.Range(_minRadius, _maxRadius)) + startPos;
         }
 
         CombineInstance[] combMesh = new CombineInstance[4];
